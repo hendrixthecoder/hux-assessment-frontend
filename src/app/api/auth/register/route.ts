@@ -8,11 +8,12 @@ export async function POST(request: Request) {
   try {
     const {
       data: { user, token },
-    } = await axios.post(`${SERVER_URL}/users/login`, body);
+    } = await axios.post(`${SERVER_URL}/users/register`, body);
+
     const serializedCookie = createCookieWith(token);
 
     return new Response(JSON.stringify(user), {
-      status: 200,
+      status: 201,
       headers: {
         "Set-Cookie": serializedCookie,
         "Content-Type": "application/json",
