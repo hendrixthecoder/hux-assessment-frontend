@@ -16,9 +16,9 @@ const LoginForm = () => {
           withCredentials: true,
         });
 
-        push("/contact-list");
-
         toast.success("Login successful!");
+
+        push("/contact-list");
       } catch (error) {
         if (error instanceof AxiosError) {
           const errorMessage =
@@ -62,7 +62,6 @@ const LoginForm = () => {
       ) : null}
 
       <button type="submit">Login</button>
-      <Toaster />
     </form>
   );
 };

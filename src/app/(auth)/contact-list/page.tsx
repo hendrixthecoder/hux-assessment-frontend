@@ -1,5 +1,5 @@
 "use server";
-import { getSession, logout } from "@/middleware";
+import { getSession } from "@/middleware";
 import React from "react";
 
 const page = async () => {
