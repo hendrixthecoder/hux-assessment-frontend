@@ -5,3 +5,5 @@ export interface User {
   phoneNumber: string;
   _id: string;
 }
+
+export interface Contact extends User {}
