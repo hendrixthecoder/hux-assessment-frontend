@@ -1,8 +1,6 @@
-import { getJWTSecret, isValidUserPayload } from "@/lib";
+import { updateSession, validateToken } from "@/lib";
 import { NextRequest, NextResponse } from "next/server";
-import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import { User } from "./types";
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("session_token")?.value;
@@ -23,28 +21,12 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  updateSession();
+  return await updateSession(request);
 }
 
-const validateToken = async (token: string) => {
-  try {
-    const result = await jwtVerify(
-      token,
-      new TextEncoder().encode(getJWTSecret())
-    );
-
-    // Type assertion with validation
-    if (isValidUserPayload(result.payload)) {
-      return result.payload as User;
-    } else {
-      return null;
-    }
-  } catch (error) {
-    return null;
-  }
+export const logout = async () => {
+  cookies().set("session_token", "", { expires: new Date(0) });
 };
-
-const updateSession = () => {};
 
 export const getSession = async () => {
   const token = cookies().get("session_token")?.value;

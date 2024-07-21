@@ -3,18 +3,21 @@ import axios, { AxiosError } from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import { useFormik } from "formik";
 import { loginValidationSchema } from "@/lib";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const { push } = useRouter();
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: loginValidationSchema,
     onSubmit: async (values) => {
       try {
-        const res = await axios.post("/api/auth/login", values, {
+        await axios.post("/api/auth/login", values, {
           withCredentials: true,
         });
 
-        console.log({ res });
+        push("/contact-list");
+
         toast.success("Login successful!");
       } catch (error) {
         if (error instanceof AxiosError) {

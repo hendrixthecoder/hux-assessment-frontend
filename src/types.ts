@@ -3,4 +3,5 @@ export interface User {
   lastName: string;
   firstName: string;
   phoneNumber: string;
+  _id: string;
 }
