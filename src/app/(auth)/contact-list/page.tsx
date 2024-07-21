@@ -1,28 +1,19 @@
 "use server";
-import { getSession } from "@/middleware";
 import { fetchUserContacts } from "@/utils";
-import { notFound } from "next/navigation";
 import React from "react";
 
 const ContactListPage = async () => {
-  const session = await getSession();
-  if (!session) notFound();
-
   const contacts = await fetchUserContacts();
 
   return (
-    <div>
-      Welcome {session?.firstName}
+    <div className="bg-slate-900 text-white h-full">
       {contacts.length ? (
         contacts.map(({ firstName, lastName }, idx) => (
-          <p key={idx}>{`${firstName} ${lastName}`}</p>
+          <div key={idx}>{`${firstName} ${lastName}`}</div>
         ))
       ) : (
-        <p>No contacts, create contacts to see them here.</p>
+        <div>No contacts, create contacts to see them here.</div>
       )}
-      {/* <form action="/api/auth/logout" method="POST">
-        <button type="submit">Logout</button>
-      </form> */}
     </div>
   );
 };

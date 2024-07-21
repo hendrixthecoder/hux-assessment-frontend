@@ -1,6 +1,6 @@
 "use client";
 import axios, { AxiosError } from "axios";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useFormik } from "formik";
 import { loginValidationSchema } from "@/lib";
 import { useRouter } from "next/navigation";

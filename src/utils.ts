@@ -22,5 +22,3 @@ export const fetchUserContacts = async () => {
     return [];
   }
 };
-
-export const fetchWithAuth = async (url: string) => {};

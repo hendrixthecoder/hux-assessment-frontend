@@ -39,5 +39,5 @@ export const getSession = async () => {
 };
 
 export const config = {
-  matcher: ["/contact-list", "/login"],
+  matcher: ["/contact-list", "/login", "/create-contact"],
 };
