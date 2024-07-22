@@ -1,29 +1,35 @@
 "use client";
+import { User } from "@/types";
 import React from "react";
-import { AxiosError } from "axios";
-import axios from "../../../config/axios";
-import { toast } from "react-hot-toast";
 import { useFormik } from "formik";
-import { registerValidationSchema } from "@/lib";
 import { useRouter } from "next/navigation";
+import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { editContactValidationSchema } from "@/lib";
 
-const CreateContactPage = () => {
+interface PageProps {
+  contact: User;
+}
+
+const EditContactForm = ({ contact }: PageProps) => {
   const { push } = useRouter();
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
+      email: contact.email,
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      phoneNumber: contact.phoneNumber,
     },
-    validationSchema: registerValidationSchema,
+    validationSchema: editContactValidationSchema,
     onSubmit: async (values) => {
       try {
-        await axios.post("/api/contacts/create", values);
+        await axios.put(`/api/contacts/edit/${contact._id}`, values, {
+          withCredentials: true,
+        });
 
-        toast.success("Contact created successfully!");
+        toast.success("Contact edited successfully!");
+
         push("/contact-list");
       } catch (error) {
         if (error instanceof AxiosError) {
@@ -53,20 +59,6 @@ const CreateContactPage = () => {
           <div>{formik.errors.email}</div>
         ) : null}
 
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          required
-        />
-        {formik.touched.password && formik.errors.password ? (
-          <div>{formik.errors.password}</div>
-        ) : null}
-
         <label htmlFor="firstName">First Name:</label>
         <input
           id="firstName"
@@ -91,15 +83,12 @@ const CreateContactPage = () => {
           onBlur={formik.handleBlur}
           required
         />
-        {formik.touched.lastName && formik.errors.lastName ? (
-          <div>{formik.errors.lastName}</div>
-        ) : null}
 
         <label htmlFor="phoneNumber">Phone Number:</label>
         <input
           id="phoneNumber"
           name="phoneNumber"
-          type="text"
+          type="phoneNumber"
           value={formik.values.phoneNumber}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -109,10 +98,10 @@ const CreateContactPage = () => {
           <div>{formik.errors.phoneNumber}</div>
         ) : null}
 
-        <button type="submit">Create Contact</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
 };
 
-export default CreateContactPage;
+export default EditContactForm;

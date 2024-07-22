@@ -2,6 +2,7 @@ import { getSession } from "@/middleware";
 import { fetchUserContact } from "@/utils";
 import { notFound } from "next/navigation";
 import React from "react";
+import EditContactForm from "@/components/EditContactForm";
 
 interface PageProps {
   params: {
@@ -9,7 +10,7 @@ interface PageProps {
   };
 }
 
-const ContactPage = async ({ params }: PageProps) => {
+const EditContactPage = async ({ params }: PageProps) => {
   const contactId = params.contactId;
   const session = await getSession();
   if (!session) return notFound();
@@ -17,7 +18,12 @@ const ContactPage = async ({ params }: PageProps) => {
   const contact = await fetchUserContact(contactId);
   if (!contact) return <p>Contact not found!</p>;
 
-  return <div>{contact.firstName}</div>;
+  return (
+    <div>
+      {contact?.firstName}
+      <EditContactForm contact={contact} />
+    </div>
+  );
 };
 
-export default ContactPage;
+export default EditContactPage;

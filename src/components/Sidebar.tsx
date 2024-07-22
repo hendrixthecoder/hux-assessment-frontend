@@ -27,7 +27,7 @@ const sidebarOptions: SidebarOptions[] = [
 
 const Sidebar = ({ session }: { session: User }) => {
   return (
-    <div className="w-1/5 flex flex-col min-h-screen bg-gray-900 text-white p-4 flex-shrink-0">
+    <div className="w-1/5 flex flex-col min-h-screen bg-gray-900 text-white p-4 flex-shrink-0 relative">
       <p>Welcome {session.firstName}</p>
       <ul className="mt-2 space-y-1" role="list">
         {sidebarOptions.map((option) => {
@@ -47,6 +47,13 @@ const Sidebar = ({ session }: { session: User }) => {
           );
         })}
       </ul>
+      <form
+        action="/api/auth/logout"
+        method="POST"
+        className="absolute bottom-0 py-1"
+      >
+        <button type="submit">Logout</button>
+      </form>
     </div>
   );
 };

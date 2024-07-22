@@ -41,6 +41,7 @@ export const config = {
     "/contact-list",
     "/login",
     "/create-contact",
-    "/contact/:contactId*",
+    "/contact/:contactId",
+    "/contact/edit/:contactId",
   ],
 };

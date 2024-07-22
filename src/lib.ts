@@ -37,6 +37,25 @@ export const registerValidationSchema = yup.object().shape({
     .matches(/^[0-9]{10,12}$/, "Phone number must be between 10 and 12 digits"),
 });
 
+export const editContactValidationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .required("Email is required!")
+    .min(1, "Email is required!"),
+  firstName: yup
+    .string()
+    .required("First name is required!")
+    .min(1, "Email is required!"),
+  lastName: yup
+    .string()
+    .required("Last name is required!")
+    .min(1, "Email is required!"),
+  phoneNumber: yup
+    .string()
+    .required("Phone number is required")
+    .matches(/^[0-9]{10,12}$/, "Phone number must be between 10 and 12 digits"),
+});
+
 export const createCookieWith = (token: string) => {
   const MAX_AGE = 60 * 60 * 24 * 30;
 
@@ -102,6 +121,13 @@ export async function updateSession(request: NextRequest) {
     maxAge: 10 * 60, // 10 minutes
     path: "/",
   });
+
+  res.headers.set(
+    "Cache-Control",
+    "no-store, no-cache, must-revalidate, proxy-revalidate"
+  );
+  res.headers.set("Pragma", "no-cache");
+  res.headers.set("Expires", "0");
 
   return res;
 }
