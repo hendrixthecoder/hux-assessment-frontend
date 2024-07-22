@@ -23,9 +23,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Update session to refresh token expiration
-  await updateSession(request);
-
-  return NextResponse.next();
+  return (await updateSession(request)) || NextResponse.next();
 }
 
 export const logout = async () => {
@@ -39,5 +37,10 @@ export const getSession = async () => {
 };
 
 export const config = {
-  matcher: ["/contact-list", "/login", "/create-contact"],
+  matcher: [
+    "/contact-list",
+    "/login",
+    "/create-contact",
+    "/contact/:contactId*",
+  ],
 };

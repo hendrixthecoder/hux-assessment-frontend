@@ -22,3 +22,21 @@ export const fetchUserContacts = async () => {
     return [];
   }
 };
+
+export const fetchUserContact = async (contactId: string) => {
+  try {
+    const token = cookies().get("session_token")?.value;
+
+    const res = await axios.get(`${SERVER_URL}/users/contacts/${contactId}`, {
+      headers: {
+        Cookie: `session_token=${token}`,
+      },
+      withCredentials: true,
+    });
+
+    return res.data as Contact;
+  } catch (error) {
+    console.error("Error fetching contact:", error);
+    return null;
+  }
+};
