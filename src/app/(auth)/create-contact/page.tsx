@@ -13,7 +13,6 @@ const CreateContactPage = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
       firstName: "",
       lastName: "",
       phoneNumber: "",
@@ -51,20 +50,6 @@ const CreateContactPage = () => {
         />
         {formik.touched.email && formik.errors.email ? (
           <div>{formik.errors.email}</div>
-        ) : null}
-
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          required
-        />
-        {formik.touched.password && formik.errors.password ? (
-          <div>{formik.errors.password}</div>
         ) : null}
 
         <label htmlFor="firstName">First Name:</label>

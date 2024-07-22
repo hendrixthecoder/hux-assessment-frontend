@@ -35,6 +35,7 @@ const DeleteContactDialog = ({ contact }: PageProps) => {
       handleCloseDialog();
       toast.success("Contact deleted successfully!");
 
+      // To visualize the absence of the deleted contact
       router.refresh();
     } catch (error) {
       if (error instanceof AxiosError) {
