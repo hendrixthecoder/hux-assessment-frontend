@@ -3,8 +3,11 @@ import axios, { AxiosError } from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import { useFormik } from "formik";
 import { registerValidationSchema } from "@/lib";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const { push } = useRouter();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -16,12 +19,12 @@ const RegisterForm = () => {
     validationSchema: registerValidationSchema,
     onSubmit: async (values) => {
       try {
-        const res = await axios.post("/api/auth/register", values, {
+        await axios.post("/api/auth/register", values, {
           withCredentials: true,
         });
 
-        console.log({ res });
         toast.success("Registered successfully!");
+        push("/contact-list");
       } catch (error) {
         if (error instanceof AxiosError) {
           const errorMessage =

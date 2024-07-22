@@ -18,6 +18,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next(); // Allow access to the login page if not logged in
   }
 
+  if (pathNameStartsWith("/register")) {
+    return NextResponse.next(); // Allow access to the register page
+  }
+
   if (!verifiedToken) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
@@ -43,5 +47,6 @@ export const config = {
     "/create-contact",
     "/contact/:contactId",
     "/contact/edit/:contactId",
+    "/register",
   ],
 };
