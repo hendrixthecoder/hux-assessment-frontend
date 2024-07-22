@@ -1,8 +1,8 @@
 "use server";
 import { fetchUserContacts } from "@/utils";
-import Link from "next/link";
 import React from "react";
-import { UserRoundPen, Trash2 } from "lucide-react";
+import { UserRoundPen } from "lucide-react";
+import DeleteContactDialog from "@/components/DeleteContactDialog";
 
 const ContactListPage = async () => {
   const contacts = await fetchUserContacts();
@@ -11,15 +11,15 @@ const ContactListPage = async () => {
     <div className="bg-slate-900 text-white h-full">
       <div className="flex flex-col gap-1">
         {contacts.length ? (
-          contacts.map(({ firstName, lastName, _id }, idx) => (
+          contacts.map((contact, idx) => (
             <div className="flex gap-2" key={idx}>
-              <a href={`/contact/${_id}`}>{`${firstName} ${lastName}`}</a>
-              <a href={`/contact/edit/${_id}`}>
+              <a
+                href={`/contact/${contact._id}`}
+              >{`${contact.firstName} ${contact.lastName}`}</a>
+              <a href={`/contact/edit/${contact._id}`}>
                 <UserRoundPen />
               </a>
-              <button>
-                <Trash2 />
-              </button>
+              <DeleteContactDialog contact={contact} />
             </div>
           ))
         ) : (

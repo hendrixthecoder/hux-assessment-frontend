@@ -62,3 +62,51 @@ export async function PUT(request: Request, { params }: ParamsType) {
     );
   }
 }
+
+export async function DELETE(request: Request, { params }: ParamsType) {
+  const token = cookies().get("session_token")?.value;
+  if (!token) {
+    return NextResponse.json(
+      { message: "No session token found" },
+      { status: 401 }
+    );
+  }
+
+  try {
+    await axios.delete(`${SERVER_URL}/users/contacts/${params.contactId}`, {
+      headers: {
+        Cookie: `session_token=${token}`,
+      },
+      withCredentials: true,
+    });
+
+    // Refresh user session due to activity
+    const serializedCookie = createCookieWith(token);
+
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "Set-Cookie": serializedCookie,
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      // Extract error details from AxiosError
+      const errorData = {
+        message: error.message,
+        ...(error.response?.data ? { data: error.response.data } : {}),
+      };
+
+      return NextResponse.json(errorData, {
+        status: error.response?.status ?? 500,
+      });
+    }
+
+    // Return a generic error if it's not an AxiosError
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    );
+  }
+}

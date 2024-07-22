@@ -24,7 +24,7 @@ const EditContactForm = ({ contact }: PageProps) => {
     validationSchema: editContactValidationSchema,
     onSubmit: async (values) => {
       try {
-        await axios.put(`/api/contacts/edit/${contact._id}`, values, {
+        await axios.put(`/api/contacts/${contact._id}`, values, {
           withCredentials: true,
         });
 

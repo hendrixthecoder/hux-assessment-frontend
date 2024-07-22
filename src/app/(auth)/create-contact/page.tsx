@@ -21,7 +21,7 @@ const CreateContactPage = () => {
     validationSchema: registerValidationSchema,
     onSubmit: async (values) => {
       try {
-        await axios.post("/api/contacts/create", values);
+        await axios.post("/api/contacts", values);
 
         toast.success("Contact created successfully!");
         push("/contact-list");
