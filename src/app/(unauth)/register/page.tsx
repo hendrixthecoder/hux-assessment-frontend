@@ -135,7 +135,7 @@ const RegisterForm = () => {
 
         <button
           type="submit"
-          className="p-3 rounded bg-primary text-white w-3/5"
+          className="p-3 rounded bg-primary text-white w-3/5 mt-3"
         >
           Get me started!
         </button>
