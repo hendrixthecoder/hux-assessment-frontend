@@ -8,7 +8,7 @@ const ContactListPage = async () => {
   const contacts = await fetchUserContacts();
 
   return (
-    <div className="bg-slate-900 text-white h-full">
+    <div className="h-full p-3">
       <div className="flex flex-col gap-1">
         {contacts.length ? (
           contacts.map((contact, idx) => (

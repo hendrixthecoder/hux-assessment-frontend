@@ -7,14 +7,19 @@ import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 import LoginAnimation from "../../../../public/assets/login-animation.json";
 import Link from "next/link";
+import { useState } from "react";
 
 const LoginForm = () => {
   const { push } = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: loginValidationSchema,
     onSubmit: async (values) => {
       try {
+        setIsLoading(true);
+
         await axios.post("/api/auth/login", values, {
           withCredentials: true,
         });
@@ -30,6 +35,8 @@ const LoginForm = () => {
         } else {
           toast.error("An unexpected error occurred");
         }
+      } finally {
+        setIsLoading(false);
       }
     },
   });
@@ -54,7 +61,7 @@ const LoginForm = () => {
           />
         </div>
         {formik.touched.email && formik.errors.email ? (
-          <div>{formik.errors.email}</div>
+          <div className="text-red-500 text-xs">{formik.errors.email}</div>
         ) : null}
         <div className="flex flex-col gap-1 w-3/5">
           <label htmlFor="password">Password:</label>
@@ -69,7 +76,7 @@ const LoginForm = () => {
             className="outline-none rounded p-2 border"
           />
           {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
+            <div className="text-red-500 text-xs">{formik.errors.password}</div>
           ) : null}
         </div>
         <button

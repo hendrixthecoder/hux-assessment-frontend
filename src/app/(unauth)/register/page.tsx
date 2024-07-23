@@ -1,15 +1,17 @@
 "use client";
 import axios, { AxiosError } from "axios";
-import { toast, Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useFormik } from "formik";
 import { registerValidationSchema } from "@/lib";
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 import RegisterAnimation from "../../../../public/assets/register-animation.json";
 import Link from "next/link";
+import { useState } from "react";
 
 const RegisterForm = () => {
   const { push } = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const formik = useFormik({
     initialValues: {
@@ -22,6 +24,8 @@ const RegisterForm = () => {
     validationSchema: registerValidationSchema,
     onSubmit: async (values) => {
       try {
+        setIsLoading(true);
+
         await axios.post("/api/auth/register", values, {
           withCredentials: true,
         });
@@ -36,6 +40,8 @@ const RegisterForm = () => {
         } else {
           toast.error("An unexpected error occurred");
         }
+      } finally {
+        setIsLoading(false);
       }
     },
   });
