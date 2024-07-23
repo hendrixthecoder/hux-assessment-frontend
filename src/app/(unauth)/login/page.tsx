@@ -83,7 +83,10 @@ const LoginForm = () => {
         </div>
         <button
           type="submit"
-          className="p-3 rounded bg-primary text-white w-3/5 mt-3"
+          disabled={isLoading}
+          className={`p-3 rounded bg-primary text-white w-3/5 mt-3 ${
+            isLoading ? "cursor-not-allowed" : ""
+          }`}
         >
           Login
         </button>
