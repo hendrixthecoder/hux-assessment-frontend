@@ -45,7 +45,7 @@ const CreateContactPage = () => {
     <div className="h-full p-3">
       <form
         onSubmit={formik.handleSubmit}
-        className="flex flex-col w-full md:w-1/2 items-center justify-center gap-2 h-full"
+        className="flex flex-col w-full md:w-1/2 gap-2 h-full"
       >
         <div className="flex flex-col gap-1 w-3/5">
           <label htmlFor="email">Email:</label>

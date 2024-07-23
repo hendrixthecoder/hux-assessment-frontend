@@ -19,8 +19,7 @@ const EditContactPage = async ({ params }: PageProps) => {
   if (!contact) return <p>Contact not found!</p>;
 
   return (
-    <div>
-      {contact?.firstName}
+    <div className="p-4">
       <EditContactForm contact={contact} />
     </div>
   );

@@ -55,10 +55,7 @@ const DeleteContactDialog = ({ contact }: PageProps) => {
       <button onClick={handleOpenDialog}>
         <Trash2 />
       </button>
-      <dialog
-        ref={dialogRef}
-        className="rounded p-3 flex flex-col gap-3 hidden"
-      >
+      <dialog ref={dialogRef} className="rounded p-3 flex flex-col gap-3">
         <p>
           Are you sure you want to delete {contact.firstName} {contact.lastName}{" "}
           contact?

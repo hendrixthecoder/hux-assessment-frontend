@@ -28,6 +28,8 @@ const LoginForm = () => {
 
         push("/contact-list");
       } catch (error) {
+        console.log({ error });
+
         if (error instanceof AxiosError) {
           const errorMessage =
             error.response?.data?.data.message || "An error occurred";

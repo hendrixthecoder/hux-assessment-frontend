@@ -43,62 +43,82 @@ const EditContactForm = ({ contact }: PageProps) => {
     },
   });
   return (
-    <div>
-      <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="email">Email:</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          required
-        />
-        {formik.touched.email && formik.errors.email ? (
-          <div>{formik.errors.email}</div>
-        ) : null}
+    <div className="flex h-full ">
+      <form
+        onSubmit={formik.handleSubmit}
+        className="flex flex-col md:w-1/2 items-center justify-center gap-2"
+      >
+        <div className="flex flex-col gap-1 w-3/5">
+          <label htmlFor="email">Email:</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            required
+            className="outline-none rounded p-2 border"
+          />
+          {formik.touched.email && formik.errors.email ? (
+            <div>{formik.errors.email}</div>
+          ) : null}
+        </div>
 
-        <label htmlFor="firstName">First Name:</label>
-        <input
-          id="firstName"
-          name="firstName"
-          type="firstName"
-          value={formik.values.firstName}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          required
-        />
-        {formik.touched.firstName && formik.errors.firstName ? (
-          <div>{formik.errors.firstName}</div>
-        ) : null}
+        <div className="flex flex-col gap-1 w-3/5">
+          <label htmlFor="firstName">First Name:</label>
+          <input
+            id="firstName"
+            name="firstName"
+            type="firstName"
+            value={formik.values.firstName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            required
+            className="outline-none rounded p-2 border"
+          />
+          {formik.touched.firstName && formik.errors.firstName ? (
+            <div>{formik.errors.firstName}</div>
+          ) : null}
+        </div>
 
-        <label htmlFor="lastName">Last Name:</label>
-        <input
-          id="lastName"
-          name="lastName"
-          type="lastName"
-          value={formik.values.lastName}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          required
-        />
+        <div className="flex flex-col gap-1 w-3/5">
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            id="lastName"
+            name="lastName"
+            type="lastName"
+            value={formik.values.lastName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            required
+            className="outline-none rounded p-2 border"
+          />
+        </div>
 
-        <label htmlFor="phoneNumber">Phone Number:</label>
-        <input
-          id="phoneNumber"
-          name="phoneNumber"
-          type="phoneNumber"
-          value={formik.values.phoneNumber}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          required
-        />
-        {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-          <div>{formik.errors.phoneNumber}</div>
-        ) : null}
+        <div className="flex flex-col gap-1 w-3/5">
+          <label htmlFor="phoneNumber">Phone Number:</label>
+          <input
+            id="phoneNumber"
+            name="phoneNumber"
+            type="phoneNumber"
+            value={formik.values.phoneNumber}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            required
+            className="outline-none rounded p-2 border"
+          />
+          {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+            <div>{formik.errors.phoneNumber}</div>
+          ) : null}
+        </div>
 
-        <button type="submit">Login</button>
+        <button
+          type="submit"
+          className="p-3 rounded bg-primary text-white w-3/5 mt-3"
+        >
+          Edit contact
+        </button>
       </form>
     </div>
   );
