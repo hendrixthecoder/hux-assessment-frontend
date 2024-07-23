@@ -1,6 +1,6 @@
 "use client";
 import { User } from "@/types";
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
@@ -13,6 +13,7 @@ interface PageProps {
 
 const EditContactForm = ({ contact }: PageProps) => {
   const { push } = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const formik = useFormik({
     initialValues: {
@@ -24,6 +25,8 @@ const EditContactForm = ({ contact }: PageProps) => {
     validationSchema: editContactValidationSchema,
     onSubmit: async (values) => {
       try {
+        setIsLoading(true);
+
         await axios.put(`/api/contacts/${contact._id}`, values, {
           withCredentials: true,
         });
@@ -39,6 +42,8 @@ const EditContactForm = ({ contact }: PageProps) => {
         } else {
           toast.error("An unexpected error occurred");
         }
+      } finally {
+        setIsLoading(false);
       }
     },
   });
@@ -115,7 +120,9 @@ const EditContactForm = ({ contact }: PageProps) => {
 
         <button
           type="submit"
-          className="p-3 rounded bg-primary text-white w-3/5 mt-3"
+          className={`p-3 rounded bg-primary text-white w-3/5 mt-3 ${
+            isLoading ? "cursor-not-allowed" : ""
+          }`}
         >
           Edit contact
         </button>
