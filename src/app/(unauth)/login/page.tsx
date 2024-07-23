@@ -6,6 +6,7 @@ import { loginValidationSchema } from "@/lib";
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 import LoginAnimation from "../../../../public/assets/login-animation.json";
+import Link from "next/link";
 
 const LoginForm = () => {
   const { push } = useRouter();
@@ -71,13 +72,21 @@ const LoginForm = () => {
             <div>{formik.errors.password}</div>
           ) : null}
         </div>
-
         <button
           type="submit"
           className="p-3 rounded bg-primary text-white w-3/5 mt-3"
         >
           Login
         </button>
+        <div className="flex items-center justify-between gap-3 w-3/5">
+          <Link className="text-xs text-primary" href="/">
+            Back Home
+          </Link>
+
+          <Link className="text-xs text-primary" href="/register">
+            Don&apos;t have an account? Register
+          </Link>
+        </div>
       </form>
       <div className="hidden sm:flex w-1/2 min-h-full items-center justify-center">
         <Lottie animationData={LoginAnimation} />

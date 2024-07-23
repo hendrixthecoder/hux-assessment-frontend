@@ -6,6 +6,7 @@ import { registerValidationSchema } from "@/lib";
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 import RegisterAnimation from "../../../../public/assets/register-animation.json";
+import Link from "next/link";
 
 const RegisterForm = () => {
   const { push } = useRouter();
@@ -139,7 +140,16 @@ const RegisterForm = () => {
         >
           Get me started!
         </button>
-        <Toaster />
+
+        <div className="flex items-center justify-between gap-3 w-3/5">
+          <Link className="text-xs text-primary" href="/">
+            Back Home
+          </Link>
+
+          <Link className="text-xs text-primary" href="/login">
+            Have an account? Login
+          </Link>
+        </div>
       </form>
       <div className="hidden sm:flex w-1/2 min-h-full items-center justify-center">
         <Lottie animationData={RegisterAnimation} />
