@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="h-svh flex w-full  p-4 md:p-10">
+    <main className="h-svh flex w-full p-4 md:p-10">
       <div className="w-full sm:w-1/2 flex flex-col h-full justify-center gap-5">
         <p className="font-extrabold text-5xl md:text-6xl">
           Simplify your connections and never miss a beat, all in one Cliq!
