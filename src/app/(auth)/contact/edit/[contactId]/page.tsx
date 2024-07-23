@@ -16,7 +16,7 @@ const EditContactPage = async ({ params }: PageProps) => {
   if (!session) return notFound();
 
   const contact = await fetchUserContact(contactId);
-  if (!contact) return <p>Contact not found!</p>;
+  if (!contact) return <p className="p-4">Contact not found!</p>;
 
   return (
     <div className="p-4">

@@ -46,7 +46,7 @@ const EditContactForm = ({ contact }: PageProps) => {
     <div className="flex h-full ">
       <form
         onSubmit={formik.handleSubmit}
-        className="flex flex-col md:w-1/2 items-center justify-center gap-2"
+        className="flex flex-col w-1/2 items-center justify-center gap-2 "
       >
         <div className="flex flex-col gap-1 w-3/5">
           <label htmlFor="email">Email:</label>
