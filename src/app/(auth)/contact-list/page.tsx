@@ -19,6 +19,7 @@ const ContactListPage = async () => {
               <a href={`/contact/edit/${contact._id}`}>
                 <UserRoundPen />
               </a>
+
               <DeleteContactDialog contact={contact} />
             </div>
           ))
